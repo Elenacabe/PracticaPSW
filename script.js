@@ -66,10 +66,18 @@ function playGame(playerChoice){
         
     }
 
-dedfault: 
 
 console.log('ORDENA---->'+randomChoice+'vs'+playerChoice+'<------------HUMANO')
 console.log('el ordena '+computerScore+ ' el humano '+playerScore )
+if (computerScore-playerScore==2){
+    alert ("EL ORDENA HA GANAO")
+    computerScore=0
+    playerScore=0
+} else if (playerScore-computerScore==2){
+    alert ('HAS GANAO')
+    computerScore=0
+    playerScore=0
+}
     
 
 }
