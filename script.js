@@ -1,87 +1,91 @@
-let playerScore = 0
-let computerScore = 0
-let empate=false
+let playerScore = 0;
+let computerScore = 0;
+let totalGames = 0;
+let empate = false;
 
-function playGame(playerChoice){
-    const choices=['piedra', 'papel','tijeras']
-    const randomNum= Math.floor(Math.random()*3)
-    const randomChoice= choices[randomNum]
+function playGame(playerChoice) {
+    const choices = ['piedra', 'papel', 'tijeras'];
+    const randomNum = Math.floor(Math.random() * 3);
+    const randomChoice = choices[randomNum];
+    let resultText = '';
 
-    switch (playerChoice){
-        case 'piedra':{
-            switch (randomChoice){
-                case 'piedra':{
-                empate=true
-                break;
-                }
-                case 'papel':{
-                    computerScore++
+    // Lógica del juego
+    switch (playerChoice) {
+        case 'piedra':
+            switch (randomChoice) {
+                case 'piedra':
+                    empate = true;
+                    resultText = "Empate";
                     break;
-                }
-                case 'tijeras':{
-                    playerScore++
+                case 'papel':
+                    computerScore++;
+                    resultText = "Perdiste, el ordenador eligió papel";
                     break;
-                }
+                case 'tijeras':
+                    playerScore++;
+                    resultText = "Ganaste, el ordenador eligió tijeras";
+                    break;
             }
             break;
-        }
-
-        case 'papel':{
-            switch (randomChoice){
-                case 'piedra':{
-                    playerScore++
+        case 'papel':
+            switch (randomChoice) {
+                case 'piedra':
+                    playerScore++;
+                    resultText = "Ganaste, el ordenador eligió piedra";
                     break;
-                }
-                case 'papel':{
-                    empate=true
+                case 'papel':
+                    empate = true;
+                    resultText = "Empate";
                     break;
-                }
-                case 'tijeras':{
-                    computerScore++
-                }
-
+                case 'tijeras':
+                    computerScore++;
+                    resultText = "Perdiste, el ordenador eligió tijeras";
+                    break;
             }
             break;
-        }
-        case 'tijeras':{
-            switch (randomChoice){
-                case 'piedra':{
-                    computerScore
+        case 'tijeras':
+            switch (randomChoice) {
+                case 'piedra':
+                    computerScore++;
+                    resultText = "Perdiste, el ordenador eligió piedra";
                     break;
-                }
-                case 'papel':{
-                    playerScore++
+                case 'papel':
+                    playerScore++;
+                    resultText = "Ganaste, el ordenador eligió papel";
                     break;
-                }
-                case 'tijeras':{
-                    empate=true
+                case 'tijeras':
+                    empate = true;
+                    resultText = "Empate";
                     break;
-                }
             }
             break;
-
-        }
-
-
-        
     }
 
+    totalGames++;
+    const playerWinPercentage = ((playerScore / totalGames) * 100).toFixed(2);
 
-console.log('ORDENA---->'+randomChoice+'vs'+playerChoice+'<------------HUMANO')
-console.log('el ordena '+computerScore+ ' el humano '+playerScore )
-if (computerScore-playerScore==2){
-    alert ("EL ORDENA HA GANAO")
-    computerScore=0
-    playerScore=0
-} else if (playerScore-computerScore==2){
-    alert ('HAS GANAO')
-    computerScore=0
-    playerScore=0
+    // Mostrar resultados en la interfaz
+    document.getElementById('result').innerHTML = `
+        <p>${resultText}</p>
+        <p>Elección del ordenador: ${randomChoice}</p>
+        <p>Victorias del jugador: ${playerScore}</p>
+        <p>Victorias del ordenador: ${computerScore}</p>
+        <p>Porcentaje de victorias del jugador: ${playerWinPercentage}%</p>
+    `;
+
+    // Reiniciar si alguien llega a 2 puntos de ventaja
+    if (computerScore - playerScore == 2) {
+       resultText="HAS PERDIDO LA PARTIDA";
+        resetGame();
+    } else if (playerScore - computerScore == 2) {
+        resultText="HAS GANADO LA PARTIDA";
+        resetGame();
+    }
 }
-    
 
-}
-
-function endGame(){
-
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    totalGames = 0;
+    document.getElementById('result').innerHTML = '';
 }
