@@ -33,11 +33,12 @@ function App() {
         <>
           <h1>Hola {user}</h1>
           <Game onPlay={addToHistory} />
-          <div className="stats-container">
+          {stats &&
+          <div className="text-box stats-container">
             <h2>Estadísticas</h2>
             <p>Total de juegos: {stats.totalGames}</p>
             <p>Victorias: {stats.winPercentage}%</p>
-          </div>
+          </div>}
           <History history={history} />
         </>
       )}

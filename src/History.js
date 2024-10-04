@@ -3,10 +3,10 @@ import React from 'react';
 function History({ history }) {
   return (
     <div className="history-container">
-      <h2>Historial</h2>
+      <h2>Historial de Partidas</h2>
       <ul>
         {history.map((item, index) => (
-          <li key={index}>{item}</li>
+          <li key={index}>{item}</li> 
         ))}
       </ul>
     </div>
