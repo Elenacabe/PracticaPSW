@@ -42,8 +42,8 @@ function Game({ onPlay }) {
     setUserChoice(choice);
     setComputerChoice(computerChoice);
     setGameResult(result);
-    setResult(`Tú: ${choice}, Computadora: ${computerChoice} - ${result}`);
-    onPlay(`Tú: ${choice}, Computadora: ${computerChoice} - ${result}`);
+    setResult(`TÚ: ${choice}, ORDENADOR: ${computerChoice} - ${result}`);
+    onPlay(`TÚ: ${choice}, ORDENADOR: ${computerChoice} - ${result}`);
   };
 
   return (
@@ -60,13 +60,13 @@ function Game({ onPlay }) {
       <div className="choices-display">
         {userChoice && (
           <div className="text-box choice">
-            <h3>Tu elección:</h3>
+            <h3>TÚ:</h3>
             <img src={imageMap[userChoice]} alt={userChoice} />
           </div>
         )}
         {computerChoice && (
           <div className="text-box choice">
-            <h3>Elección del ordenador:</h3>
+            <h3>ORDENADOR:</h3>
             <img src={imageMap[computerChoice]} alt={computerChoice} />
           </div>
         )}
