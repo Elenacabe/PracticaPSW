@@ -18,8 +18,8 @@ function App() {
 
   const calculateStatistics = () => {
     const totalGames = history.length;
-    const wins = history.filter((result) => result.includes('Ganaste')).length;
-    const winPercentage = totalGames > 0 ? (wins / totalGames) * 100 :0;
+    const wins = history.filter((result) => result.includes('GANAS')).length;
+    const winPercentage = totalGames > 0 ? (wins / totalGames) * 100 :0
     return { totalGames, winPercentage: winPercentage.toFixed(2) };
   };
 
