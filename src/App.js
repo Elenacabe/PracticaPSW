@@ -37,7 +37,7 @@ function App() {
             <p>Total de juegos: {stats.totalGames}</p>
             <p>Victorias: {stats.winPercentage}%</p>
           </div>
-          <Game onPlay={addToHistory} />
+          <Game onPlay={addToHistory} user={user} />
           <br/>
            {history.length>0 && <History history={history} />}
         </>

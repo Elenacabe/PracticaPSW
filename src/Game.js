@@ -19,11 +19,15 @@ const imageMap = {
 
 
 /*juego*/
-function Game({ onPlay }) {
+function Game({ onPlay, user}) {
   const [result, setResult] = useState('');
   const [userChoice, setUserChoice] = useState('');
   const [computerChoice, setComputerChoice] = useState('');
   const [gameResult, setGameResult] = useState('');
+  // init user and computer scoreboard points to 0
+  const [userScoreBoard, setUserScoreBoard] = useState(0)
+  const [computerScoreBoard, setComputerScoreBoard] = useState(0)
+
 
   const getComputerChoice = () => {
     return options[Math.floor(Math.random() * options.length)];
@@ -46,6 +50,14 @@ function Game({ onPlay }) {
   const handleClick = (choice) => {
     const computerChoice = getComputerChoice();
     const result = determineWinner(choice, computerChoice);
+    if (result === 'GANAS') {
+      setUserScoreBoard(userScoreBoard + 1)
+    } else if (result === 'PIERDES'){
+      setComputerScoreBoard(computerScoreBoard + 1)
+    } else {
+      //en caso de empate no suma ni hace nada
+    }
+
     setUserChoice(choice);
     setComputerChoice(computerChoice);
     setGameResult(result);
@@ -63,13 +75,14 @@ function Game({ onPlay }) {
           </button>
         ))}
       </div>
-      <Marcador />
+
+      <Marcador userScoreBoard={userScoreBoard} computerScoreBoard={computerScoreBoard} user={user}/>
     
       
       <div className="choices-display">
         {userChoice && (
           <div className="text-box choice">
-            <h3>TÚ:</h3>
+            <h3>{user}:</h3>
             <img src={imageMap[userChoice]} alt={userChoice} />
           </div>
         )}

@@ -1,0 +1,39 @@
+.div-scoreboard {
+    display: flex;
+    justify-content: space-around;  /* Coloca los cuadros a los lados y separados */
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;   /* Ancho del cuadro */
+    height: 120px;  /* Alto del cuadro */
+    background-color: rgba(255, 255, 255, 0.1);  /* Fondo transparente */
+    border: 2px solid #fff;  /* Borde blanco */
+    border-radius: 10px;  /* Bordes redondeados */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);  /* Sombra */
+    color: #161515;  /* Color de texto blanco */
+  }
+  
+  .player-name {
+    font-size: 1.2rem;  /* Tamaño de la fuente del nombre del jugador */
+    margin-bottom: 10px;  /* Espacio entre el nombre y el marcador */
+    text-transform: uppercase;  /* Poner el nombre en mayúsculas */
+  }
+  
+  .score {
+    font-size: 2.5rem;  /* Tamaño del número de puntos */
+    font-weight: bold;
+  }
+  
+  /* Opcional: ajusta el diseño en pantallas pequeñas */
+  @media (max-width: 768px) {
+    .div-scoreboard {
+      flex-direction: column;  /* Cambia la dirección de los cuadros en móviles */
+    }
+  }
+  
