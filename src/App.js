@@ -34,7 +34,7 @@ function App() {
           <h1>Hola {user}</h1>
           <div className="text-box stats-container">
             <h2>Estadísticas</h2>
-            <p>Total de juegos: {stats.totalGames}</p>
+            <p>Total juegos: {stats.totalGames}</p>
             <p>Victorias: {stats.winPercentage}%</p>
           </div>
           <Game onPlay={addToHistory} />
