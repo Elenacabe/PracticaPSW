@@ -55,7 +55,7 @@ function Game({ onPlay, user}) {
     } else if (result === 'PIERDES'){
       setComputerScoreBoard(computerScoreBoard + 1)
     } else {
-      //en caso de empate no suma ni hace nada
+      //en caso de empate no suma ni hace nada--->no hace falta entonces este else
     }
 
     setUserChoice(choice);

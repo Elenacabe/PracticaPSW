@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './marcador.css'
 
 function Marcador ({userScoreBoard, computerScoreBoard, user}) {
-
+//texto en espaniolll! poner ordenador!
 
     return(
 
@@ -11,6 +11,7 @@ function Marcador ({userScoreBoard, computerScoreBoard, user}) {
                 <h2 className="player-name">{user}</h2>
                 <div className="score">{userScoreBoard}</div>
             </div>
+            
 
             <div className="score-container machine-scoreboard">
                 <h2 className="player-name">Computer</h2>
