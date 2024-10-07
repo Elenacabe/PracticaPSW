@@ -8,6 +8,7 @@ import scissorsImg from './assets/scissors.png';
 import winImg from './assets/win.png';
 import loseImg from './assets/lose.png';
 import drawImg from './assets/draw.png';
+import Marcador from './Marcador';
 
 const options = ['Piedra', 'Papel', 'Tijeras'];
 const imageMap = {
@@ -62,6 +63,8 @@ function Game({ onPlay }) {
           </button>
         ))}
       </div>
+      <Marcador />
+    
       
       <div className="choices-display">
         {userChoice && (
