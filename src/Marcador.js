@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React /*, { useState }*/ from 'react'; //si no se usa useState, no es necesario importarlo
 import './marcador.css'
 
 function Marcador ({userScoreBoard, computerScoreBoard, user}) {
