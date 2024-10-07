@@ -1,10 +1,13 @@
+
+/*imporación de imagenes*/
+
 import React, { useState } from 'react';
-import rockImg from './rock.png';
-import paperImg from './paper.png';
-import scissorsImg from './scissors.png';
-import winImg from './win.png';
-import loseImg from './lose.png';
-import drawImg from './draw.png';
+import rockImg from './assets/rock.png';
+import paperImg from './assets/paper.png';
+import scissorsImg from './assets/scissors.png';
+import winImg from './assets/win.png';
+import loseImg from './assets/lose.png';
+import drawImg from './assets/draw.png';
 
 const options = ['Piedra', 'Papel', 'Tijeras'];
 const imageMap = {
@@ -13,6 +16,8 @@ const imageMap = {
   Tijeras: scissorsImg,
 };
 
+
+/*juego*/
 function Game({ onPlay }) {
   const [result, setResult] = useState('');
   const [userChoice, setUserChoice] = useState('');
@@ -35,6 +40,7 @@ function Game({ onPlay }) {
       return 'PIERDES';
     }
   };
+  /*tu choice, comparar computer choice a la vez*/
 
   const handleClick = (choice) => {
     const computerChoice = getComputerChoice();
@@ -71,11 +77,7 @@ function Game({ onPlay }) {
           </div>
         )}
       </div>
-      <div className="result-image">
-        {gameResult === 'GANAS' && <img src={winImg} alt="Ganaste" />}
-        {gameResult === 'PIERDES' && <img src={loseImg} alt="Perdiste" />}
-        {gameResult === 'EMPATE' && <img src={drawImg} alt="Empate" />}
-      </div>
+    
       {result && (
         <p
           className="text-box"
@@ -87,6 +89,11 @@ function Game({ onPlay }) {
         </p>
       )}
 
+      <div className="result-image">
+        {gameResult === 'GANAS' && <img src={winImg} alt="Ganaste" />}
+        {gameResult === 'PIERDES' && <img src={loseImg} alt="Perdiste" />}
+        {gameResult === 'EMPATE' && <img src={drawImg} alt="Empate" />}
+      </div>
   
     </div>
   );

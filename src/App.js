@@ -13,13 +13,13 @@ function App() {
   };
 
   const addToHistory = (result) => {
-    setHistory([...history, result]);
+    setHistory([result,...history]);
   };
 
   const calculateStatistics = () => {
     const totalGames = history.length;
     const wins = history.filter((result) => result.includes('GANAS')).length;
-    const winPercentage = totalGames > 0 ? (wins / totalGames) * 100 :0
+    const winPercentage = totalGames > 0 ? (wins / totalGames) * 100 :0;
     return { totalGames, winPercentage: winPercentage.toFixed(2) };
   };
 
@@ -32,14 +32,14 @@ function App() {
       ) : (
         <>
           <h1>Hola {user}</h1>
-          <Game onPlay={addToHistory} />
-          {stats &&
           <div className="text-box stats-container">
             <h2>Estadísticas</h2>
             <p>Total de juegos: {stats.totalGames}</p>
             <p>Victorias: {stats.winPercentage}%</p>
-          </div>}
-          <History history={history} />
+          </div>
+          <Game onPlay={addToHistory} />
+          <br/>
+           {history.length>0 && <History history={history} />}
         </>
       )}
     </div>

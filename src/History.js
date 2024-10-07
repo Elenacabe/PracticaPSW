@@ -2,9 +2,9 @@ import React from 'react';
 
 function History({ history }) {
   return (
-    <div className="history-container">
+    <div className='text-box'>
       <h2>Historial de Partidas</h2>
-      <ul>
+      <ul className='history-container'>
         {history.map((item, index) => (
           <li key={index}>{item}</li> 
         ))}

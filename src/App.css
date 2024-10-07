@@ -1,8 +1,10 @@
 /* App.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .App {
   text-align: center;
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
   margin: 20px;
 }
 
@@ -11,6 +13,13 @@
 .history-container,
 .stats-container {
   margin: 20px;
+}
+.login-container{
+  margin-top: 100px;
+  background-color: rgba(255, 255, 255, 0.5); 
+  border-radius: 10px; 
+  padding: 10px;
+  display: inline-block;   
 }
 
 input {
@@ -21,28 +30,31 @@ input {
 }
 
 button {
-  padding: 10px 20px;
+  padding: 12px 25px;
   margin: 5px;
-  border-radius: 5px;
+  border-radius: 25px;
   border: none;
-  background-color: #007bff;
+  background: linear-gradient(45deg, #ff6b6b, #f06595);
   color: white;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background: white;
+  color: blue;
+  transform: scale(1.05);
 }
 
 button:active {
-  background-color: #004494;
+  background: linear-gradient(45deg, #d9534f, #c9302c);
 }
 
 button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.5);
 }
 
 .options button {
@@ -97,5 +109,5 @@ li {
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.5); 
+  background-color: rgba(167, 226, 227, 0.9); 
 }
