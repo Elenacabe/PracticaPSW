@@ -39,7 +39,7 @@ function App() {
           </div>
           <Game onPlay={addToHistory} user={user} />
           <br/>
-           {history.length>0 && <History history={history} />}
+           {/* {history.length>0 && <History history={history} />} camiar de sitio a otra pagina */}
         </>
       )}
     </div>
