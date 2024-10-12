@@ -7,14 +7,18 @@ import History from './History';
 function App() {
   const [user, setUser] = useState(null);
   const [history, setHistory] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
 
   const handleLogin = (username) => {
     setUser(username);
   };
-
+  const toggleHistory = () => {
+    setShowHistory(!showHistory);
+  }
   const addToHistory = (result) => {
-    setHistory([result,...history]);
-  };
+    setHistory([...history, result]);
+  }
+
 
   const calculateStatistics = () => {
     const totalGames = history.length;
@@ -39,7 +43,9 @@ function App() {
           </div>
           <Game onPlay={addToHistory} user={user} />
           <br/>
-           {history.length>0 && <History history={history} />}
+          {!showHistory && <button onClick={toggleHistory}>Ver historial</button>}
+          {showHistory && history.length > 0 && <History history={history} />}
+          {showHistory && <button onClick={toggleHistory}>Ocultar historial</button>}
         </>
       )}
     </div>
