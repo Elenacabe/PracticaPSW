@@ -14,7 +14,7 @@ function Marcador ({userScoreBoard, computerScoreBoard, user}) {
             
 
             <div className="score-container machine-scoreboard">
-                <h2 className="player-name">Computer</h2>
+                <h2 className="player-name">Ordenador</h2>
                 <div className="score">{computerScoreBoard}</div>
             </div>
         </div>
