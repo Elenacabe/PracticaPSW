@@ -32,16 +32,15 @@ function App() {
   const stats = calculateStatistics();
 
   return (
-    <div className="App">
+    <>
       {!user ? (
         <>
           <div className='header-containter'>
             <h1>Bienvenido al mejor juego de Piedra, Papel o Tijeras!</h1>
             <p>Prepárate para una épica lucha contra el ordenador y elige sabiamente tu elección, solo así podrás lograr vencer al ordenador. A por ello!</p>
-            <img src={initlogo} className='logo'></img>
+            <img src={initlogo} className='logo' alt='Logo'></img>
           </div>
           <Login onLogin={handleLogin} />  
-          <Footer/>
         </>
         
       ) : (
@@ -56,11 +55,12 @@ function App() {
           <br/>
           {!showHistory && <button onClick={toggleHistory}>Ver historial</button>}
           {showHistory && history.length > 0 && <History history={history} />}<br/>
-          {showHistory && <button onClick={toggleHistory}>Ocultar historial</button>}
-          <Footer/>        
+          {showHistory && <button onClick={toggleHistory}>Ocultar historial</button>}      
         </>
       )}
-    </div>
+      <Footer />
+    
+    </>
   );
 }
 

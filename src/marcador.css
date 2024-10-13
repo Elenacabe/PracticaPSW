@@ -10,8 +10,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 120px;   /* Ancho del cuadro */
-    height: 120px;  /* Alto del cuadro */
+    padding: 3%;
     background-color: rgba(255, 255, 255, 0.1);  /* Fondo transparente */
     border: 2px solid #fff;  /* Borde blanco */
     border-radius: 10px;  /* Bordes redondeados */
@@ -22,7 +21,6 @@
   .player-name {
     font-size: 1.2rem;  /* Tamaño de la fuente del nombre del jugador */
     margin-bottom: 10px;  /* Espacio entre el nombre y el marcador */
-    
     text-transform: uppercase;  /* Poner el nombre en mayúsculas */
     
   }

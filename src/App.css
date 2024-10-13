@@ -10,15 +10,13 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  
-  
-}
-.App {
   text-align: center;
-  font-family: 'Poppins', sans-serif; /* Nueva fuente */
-  margin: 0;
-  padding: 0;
+  justify-content: space-around;
+  font-family: 'Poppins', sans-serif
+  
+  
 }
+
 
 .login-container,
 .game-container,

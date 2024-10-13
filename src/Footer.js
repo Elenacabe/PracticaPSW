@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { memo } from 'react';
 import logo_empresa from './assets/logo_empresa.jpeg'
 import './footer.css'
 
-function Footer(){
 
-    return(
-        <footer>
-            <div className='footer-container'>
+const Footer = memo(() => {
+  return (
+    <footer>
+     <div className="footer-container">
                 <p>Created by:</p><br/>
-                <img src={logo_empresa} alt='logo'></img>
+                <img className='logo' src={logo_empresa} alt='logo'></img>
             </div>
-        </footer>
-    )
-    
-    
-}
+    </footer>
+  );
+});
+
+
+
 
 export default Footer;
