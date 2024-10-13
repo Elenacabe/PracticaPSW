@@ -1,11 +1,23 @@
 /* App.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
+body {
+  
+  background: linear-gradient(135deg, #4A90E2, #F2F2F2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+  
+}
 .App {
   text-align: center;
-  font-family: 'Roboto', Arial, sans-serif;
-  margin: 20px;
+  font-family: 'Poppins', sans-serif; /* Nueva fuente */
+  margin: 0;
+  padding: 0;
 }
 
 .login-container,
@@ -14,11 +26,42 @@
 .stats-container {
   margin: 20px;
 }
-.login-container{
+
+/* Título y header general */
+
+
+.header-container {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+/* Imagen del logo */
+.logo {
+  max-width: 150px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  color: black;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  
+}
+
+/* Login container */
+.login-container {
   margin-top: 100px;
   background-color: rgba(255, 255, 255, 0.5); 
   border-radius: 10px; 
-  padding: 10px;
+  padding: 20px;
   display: inline-block;   
 }
 
@@ -78,6 +121,10 @@ li {
   margin: 20px 0;
 }
 
+h3{
+  text-transform: uppercase;  /* Poner el nombre en mayúsculas */
+}
+
 .choice {
   text-align: center;
 }
@@ -93,7 +140,7 @@ li {
   height: 150px;
 }
 
-/*TEXTOS*/
+/* Textos */
 .text-box {
   background-color: rgba(255, 255, 255, 0.5); 
   border-radius: 10px; 
@@ -102,12 +149,21 @@ li {
   display: inline-block; 
 }
 
-/*SCROLLL*/
+/* Scroll para el historial */
 .history-container {
   max-height: 200px;
-  overflow-y: scroll; 
+  overflow-y: auto; 
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 10px;
   background-color: rgba(167, 226, 227, 0.9); 
+  margin-top: 20px;
+}
+
+
+.stats-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.5); 
+  border-radius: 10px;
 }

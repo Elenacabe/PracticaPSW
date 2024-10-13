@@ -9,6 +9,7 @@ import winImg from './assets/win.png';
 import loseImg from './assets/lose.png';
 import drawImg from './assets/draw.png';
 import Marcador from './Marcador';
+import './App.css';
 
 const options = ['Piedra', 'Papel', 'Tijeras'];
 const imageMap = {
@@ -61,8 +62,8 @@ function Game({ onPlay, user}) {
     setUserChoice(choice);
     setComputerChoice(computerChoice);
     setGameResult(result);
-    setResult(`TÚ: ${choice}, ORDENADOR: ${computerChoice} - ${result}`);
-    onPlay(`TÚ: ${choice}, ORDENADOR: ${computerChoice} - ${result}`);
+    setResult(`${user}: ${choice}, ORDENADOR: ${computerChoice} - ${result}`);
+    onPlay(`${user}: ${choice}, ORDENADOR: ${computerChoice} - ${result}`);
   };
 
   return (

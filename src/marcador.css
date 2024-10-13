@@ -22,7 +22,9 @@
   .player-name {
     font-size: 1.2rem;  /* Tamaño de la fuente del nombre del jugador */
     margin-bottom: 10px;  /* Espacio entre el nombre y el marcador */
+    
     text-transform: uppercase;  /* Poner el nombre en mayúsculas */
+    
   }
   
   .score {
