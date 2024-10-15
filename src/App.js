@@ -5,6 +5,7 @@ import Game from './Game';
 import History from './History';
 import initlogo from './assets/logoincio.webp'
 import Footer from './Footer';
+import Nav from './Nav';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -32,7 +33,9 @@ function App() {
   const stats = calculateStatistics();
 
   return (
-    <>
+    <div className='father-container'>
+      <Nav/>  
+    
       {!user ? (
         <>
           <div className='header-containter'>
@@ -59,8 +62,9 @@ function App() {
         </>
       )}
       <Footer />
+    </div>
     
-    </>
+    
   );
 }
 

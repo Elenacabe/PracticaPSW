@@ -1,16 +1,24 @@
 .bodylog {
-    display: block ;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0;
+    /* Puedes ajustar el ancho y alto de la clase .bodylog si es necesario */
+}
+.login-container {
+    width: 400px; /* Aumentar el ancho */
+    height: 150px; /* Aumentar la altura */
+    /* Agregar padding interno si es necesario */
+    padding: 20px; /* Espaciado interno */
 }
 
 .not-succeed {
     color: white;
-    font-size: 1em;
+    font-size: 1.5em; /* Aumentar el tamaño de fuente */
     text-align: center;
     margin-top: 10px;
-    padding: 5px 10px;
+    padding: 10px 15px; /* Aumentar el espaciado interno */
     background-color: #E66E65;
     display: inline-block;
     border-radius: 5px;

@@ -156,3 +156,55 @@ h3{
   border-radius: 10px;
 }
 
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  h1 {
+      font-size: 2rem; /* Reducir tamaño del encabezado en pantallas pequeñas */
+  }
+
+  .login-container {
+      width: 90%; /* Ancho del contenedor de inicio de sesión */
+  }
+
+  .header-container {
+      padding: 20px; /* Reducir el padding en pantallas más pequeñas */
+  }
+
+  button {
+      font-size: 14px; /* Reducir el tamaño de la fuente del botón */
+      padding: 10px 20px; /* Ajustar el padding */
+  }
+
+  .choices-display {
+      flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+      align-items: center; /* Centrar elementos */
+  }
+
+  .choice img {
+      width: 80px; /* Hacer las imágenes más pequeñas en pantallas pequeñas */
+      height: 80px; /* Ajustar la altura */
+  }
+
+  .result-image img {
+      width: 120px; /* Hacer la imagen del resultado más pequeña */
+      height: 120px; /* Ajustar la altura */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+      font-size: 1.5rem; /* Reducir aún más el tamaño del encabezado en dispositivos muy pequeños */
+  }
+
+  .login-container {
+      width: 100%; /* Hacer que el contenedor ocupe todo el ancho */
+  }
+
+  button {
+      font-size: 12px; /* Reducir el tamaño de la fuente del botón */
+  }
+
+  .choices-display {
+      margin: 10px 0; /* Reducir el margen */
+  }
+}

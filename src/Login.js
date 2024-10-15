@@ -26,14 +26,13 @@ function Login({ onLogin }) {
             placeholder="Nombre de usuario"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-          />
+          /> <br/>
           <button type="submit">Jugar</button>
         </form>
       </div>
       <br/>
-        {error && <p className='not-succeed'>{error}</p>}
-      
-  </div>
+        {error && <p className='not-succeed'>{error}</p>}  
+    </div>
   );
 }
 
