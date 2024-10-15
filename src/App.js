@@ -33,7 +33,7 @@ function App() {
   const stats = calculateStatistics();
 
   return (
-    <div className='father-container'>
+    <>
       <Nav/>  
     
       {!user ? (
@@ -62,7 +62,7 @@ function App() {
         </>
       )}
       <Footer />
-    </div>
+    </>
     
     
   );

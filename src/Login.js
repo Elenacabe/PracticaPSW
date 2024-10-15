@@ -17,7 +17,7 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className='bodylog'>
+    <div className='bodylogs'>
       <div className="login-container">
         <h2>Indica tu nombre</h2>
         <form onSubmit={handleSubmit}>
@@ -30,7 +30,6 @@ function Login({ onLogin }) {
           <button type="submit">Jugar</button>
         </form>
       </div>
-      <br/>
         {error && <p className='not-succeed'>{error}</p>}  
     </div>
   );

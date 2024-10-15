@@ -1,16 +1,26 @@
-.bodylog {
+.bodylogs {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0;
+    padding-bottom: 2%;
     /* Puedes ajustar el ancho y alto de la clase .bodylog si es necesario */
 }
 .login-container {
-    width: 400px; /* Aumentar el ancho */
-    height: 150px; /* Aumentar la altura */
+    font-size: 1em;
+    max-width: 40%;
+    max-height: 20%;
     /* Agregar padding interno si es necesario */
-    padding: 20px; /* Espaciado interno */
+    padding: 2%; /* Espaciado interno */
+}
+input{
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .not-succeed {

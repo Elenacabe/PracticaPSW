@@ -4,12 +4,10 @@ import './footer.css';
 
 const Footer = () => {
   return (
-    <footer>
       <div className="footer-container">
-        <p>Created by:</p><br/>
+        <p>Created by:</p>
         <img className='logof' src={logo_empresa} alt='logo'></img>
       </div>
-    </footer>
   );
 };
 
