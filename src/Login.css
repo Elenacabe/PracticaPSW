@@ -1,0 +1,18 @@
+.bodylog {
+    display: block ;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.not-succeed {
+    color: white;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #E66E65;
+    display: inline-block;
+    border-radius: 5px;
+    border: red 2px solid;
+}
