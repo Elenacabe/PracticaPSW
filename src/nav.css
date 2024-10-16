@@ -25,8 +25,8 @@ nav {
 }
 
 .nav-container img {
-  max-width: 150px;
- 
+  max-width: 100px;
+  padding: 16px;
   display: block;
   border-radius: 100px;
 
