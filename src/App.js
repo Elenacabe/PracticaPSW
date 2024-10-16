@@ -31,7 +31,12 @@ function App() {
   };
 
   const stats = calculateStatistics();
+ 
 
+  /*
+  <p>Prepárate para una épica lucha contra el ordenador y elige sabiamente tu elección, solo así podrás lograr vencer al ordenador. A por ello!</p>
+            <img src={initlogo} className='logo' alt='Logo'></img>
+  */ 
   return (
     <>
       <Nav/>  
@@ -40,8 +45,7 @@ function App() {
         <>
           <div className='header-containter'>
             <h1>Bienvenido al mejor juego de Piedra, Papel o Tijeras!</h1>
-            <p>Prepárate para una épica lucha contra el ordenador y elige sabiamente tu elección, solo así podrás lograr vencer al ordenador. A por ello!</p>
-            <img src={initlogo} className='logo' alt='Logo'></img>
+            
           </div>
           <Login onLogin={handleLogin} />  
         </>
@@ -62,6 +66,7 @@ function App() {
         </>
       )}
       <Footer />
+      
     </>
     
     
