@@ -25,28 +25,15 @@ nav {
 }
 
 .nav-container img {
-  max-width: 100px;
+  max-width: 70px;
   padding: 16px;
   display: block;
   border-radius: 100px;
 
 }
-/*
 
-padding: 5px ;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-
-max-width: 150px;
-  margin-bottom: 20px;
-  display: block;
-  border-radius: 40px;
-  margin-left: auto;
-  margin-right: auto;
-*/
 .nav-container>p {
     padding: 20px;
-    font-size: 2rem;
+    font-size: 1.2rem;
     
 }
