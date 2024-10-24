@@ -7,63 +7,65 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
-app.use(bodyParser.json());
-app.use(cors()); // Enable CORS for all routes
 
-// MongoDB Connection
+app.use(bodyParser.json());
+app.use(cors()); 
+
+// CREA UN DOTENV Y PIDEME UN USUARIO Y LINK DE MONGODB
 mongoose.connect(process.env.MONGODB_URI);
 
-// Models
-const User = require('./models/User.js');  // User model
-//const Game = require('./models/Game');  // Game model
+// Modelos base de datos
+const User = require('./models/User.js'); 
+const Game = require('./models/Game')
 
-// Register Route
+// REGISTRO
 app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  const newUser = new User({ username, password: hashedPassword });
+  const { username, password } = req.body
+  const hashedPassword = bcrypt.hashSync(password, 10)
+  const newUser = new User({ username, password: hashedPassword })
   
   try {
     await newUser.save();
-    res.json({ message: 'Enhorabuena' });
+    res.status.apply(200).json({ message: 'Enhorabuena' });
   } catch (error) {
     res.status(500).json({ message: 'Algo fue mal' });
   }
 });
 
-// Login Route
+// LOGIN
 app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username });
-  
-  if (user && bcrypt.compareSync(password, user.password)) {
-    res.json({ message: 'PA DENTRO', user });
+  const { user, password } = req.body;
+  const username = await User.findOne({ username: user }); //ES ASI PQ EN EL MODELO ES USERNAME
+
+  if (username && bcrypt.compareSync(password, username.password)) {
+    res.status(200).json({ message: 'PA DENTRO', user });// 200-> OK MIRAR HTTP CATS PARA INFO
   } else {
-    res.status(401).json({ message: 'Cambia algo' });
+    res.status(401).json({ message: 'ERROR' });
   }
 });
 
-// Route to Register Game Result
+
+
+// JUEGOS
 app.post('/game', async (req, res) => {
-  const { userId, result } = req.body;
-  const game = new Game({ userId, result });
+  const { userId, result, gameType, history } = req.body;
+  const game = new Game({ userId, result, gameType,history });
 
   try {
     await game.save();
 
-    // Update user statistics
-    const user = await User.findById(userId);
+    const user = await User.findById(userId); //UPDATEAMOS EL USUARIO
     user.total_games += 1;
+    user.history.push(result);
     if (result === 'win') {
       user.wins += 1;
     }
     user.win_percentage = (user.wins / user.total_games) * 100;
     await user.save();
 
-    res.json({ message: 'Partida registrada', user });
+    res.status(200).json({ message: 'OK ', user });
   } catch (error) {
-    res.status(500).json({ message: 'Error al registrar partida' });
+    res.status(500).json({ message: 'ERROR' });
   }
 });
 

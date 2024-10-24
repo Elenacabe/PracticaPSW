@@ -1,7 +1,5 @@
-
-/*imporación de imagenes*/
-
 import React, { useState } from 'react';
+import axios from 'axios'; // Asegúrate de importar axios
 import rockImg from './assets/rock.png';
 import paperImg from './assets/paper.png';
 import scissorsImg from './assets/scissors.png';
@@ -18,17 +16,16 @@ const imageMap = {
   Tijeras: scissorsImg,
 };
 
-
-/*juego*/
-function Game({ onPlay, user}) {
+function Game({ onPlay, user }) {
   const [result, setResult] = useState('');
   const [userChoice, setUserChoice] = useState('');
   const [computerChoice, setComputerChoice] = useState('');
   const [gameResult, setGameResult] = useState('');
-  // init user and computer scoreboard points to 0
-  const [userScoreBoard, setUserScoreBoard] = useState(0)
-  const [computerScoreBoard, setComputerScoreBoard] = useState(0)
-
+  const [gameType, setGameType] = useState('three');
+  const [userScoreBoard, setUserScoreBoard] = useState(0);
+  const [computerScoreBoard, setComputerScoreBoard] = useState(0);
+  const [history, setHistory] = useState([]);
+  const [resultBack, setResultBack] = useState('');
 
   const getComputerChoice = () => {
     return options[Math.floor(Math.random() * options.length)];
@@ -46,24 +43,92 @@ function Game({ onPlay, user}) {
       return 'PIERDES';
     }
   };
-  /*tu choice, comparar computer choice a la vez*/
 
+  const resetGame = () => {
+    setUserChoice('');
+    setComputerChoice('');
+    setGameResult('');
+    setResult('');
+  };
+
+  const handleGameType = (type) => {
+    setGameType(type);
+    resetGame();
+  };
+
+  // JUGADA EN FRONT
   const handleClick = (choice) => {
     const computerChoice = getComputerChoice();
     const result = determineWinner(choice, computerChoice);
-    if (result === 'GANAS') {
-      setUserScoreBoard(userScoreBoard + 1)
-    } else if (result === 'PIERDES'){
-      setComputerScoreBoard(computerScoreBoard + 1)
-    } else {
-      //en caso de empate no suma ni hace nada--->no hace falta entonces este else
-    }
 
     setUserChoice(choice);
     setComputerChoice(computerChoice);
     setGameResult(result);
+    setHistory([...history, result]);
+
+    // MARCADOR
+    if (result === 'GANAS') {
+      setUserScoreBoard(userScoreBoard + 1);
+      checkForGameOver('user', userScoreBoard + 1);
+    } else if (result === 'PIERDES') {
+      setComputerScoreBoard(computerScoreBoard + 1);
+      checkForGameOver('computer', computerScoreBoard + 1);
+    }
+
     setResult(`${user}: ${choice}, ORDENADOR: ${computerChoice} - ${result}`);
     onPlay(`${user}: ${choice}, ORDENADOR: ${computerChoice} - ${result}`);
+  };
+
+  // ALGUIEN GAMA?
+  const checkForGameOver = (player, score) => {
+    let winningScore;
+  
+    // DETERMINAR CUANTOS PUNTOS PARA GANAR POR TIPO JUEGO
+    switch (gameType) {
+      case 'three':
+        winningScore = 3;
+        break;
+      case 'five':
+        winningScore = 5;
+        break;
+      case 'seven':
+        winningScore = 7;
+        break;
+      default:
+        winningScore = 3; // DEFAULT SIN CHOICE
+    }
+  
+    if (score === winningScore) { //SI LLEGO AL WINNING SCORE PARAMOS
+      if (player === 'user') {
+        setResult('GANASTE LA PARTIDA');
+        setResultBack('win')
+        onPlay('GANASTE LA PARTIDA');
+      } else {
+        setResult('PERDISTE LA PARTIDA');
+        setResultBack('lose')
+        onPlay('PERDISTE LA PARTIDA');
+      }
+  
+
+      // RESET JUEGO
+      setUserScoreBoard(0);
+      setComputerScoreBoard(0);
+    }
+  };
+
+  // BACKKKKKKK MANAGEMENTTT
+  const handleGame = async (choice) => {
+    try {
+      const response = await axios.post('http://localhost:5000/game', { //ESTO ES LO Q LE PASO AL BACK
+        userId: user,
+        result: resultBack,
+        gameType: gameType,
+        history: history,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error al enviar los datos del juego:', error);
+    }
   };
 
   return (
@@ -71,15 +136,26 @@ function Game({ onPlay, user}) {
       <h2>Juega Piedra, Papel o Tijeras</h2>
       <div className="options">
         {options.map((option) => (
-          <button key={option} onClick={() => handleClick(option)}>
+          <button
+            key={option}
+            onClick={() => {
+              handleClick(option);
+              handleGame(option);
+            }}
+          >
             {option}
           </button>
         ))}
       </div>
 
-      <Marcador userScoreBoard={userScoreBoard} computerScoreBoard={computerScoreBoard} user={user}/>
-    
-      
+      <Marcador userScoreBoard={userScoreBoard} computerScoreBoard={computerScoreBoard} user={user} />
+
+      <div className="game-type">
+        <button onClick={() => handleGameType('three')}>Mejor de 3</button>
+        <button onClick={() => handleGameType('five')}>Mejor de 5</button>
+        <button onClick={() => handleGameType('seven')}>Mejor de 7</button>
+      </div>
+
       <div className="choices-display">
         {userChoice && (
           <div className="text-box choice">
@@ -94,7 +170,7 @@ function Game({ onPlay, user}) {
           </div>
         )}
       </div>
-    
+
       {result && (
         <p
           className="text-box"
@@ -111,9 +187,9 @@ function Game({ onPlay, user}) {
         {gameResult === 'PIERDES' && <img src={loseImg} alt="Perdiste" />}
         {gameResult === 'EMPATE' && <img src={drawImg} alt="Empate" />}
       </div>
-  
     </div>
   );
 }
 
 export default Game;
+

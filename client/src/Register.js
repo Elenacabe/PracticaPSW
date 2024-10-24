@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';  // Asumo que aquí estás aplicando el estilo global para login y registro
-import Login from './Login';  // Asumiendo que tienes otro componente llamado Login
+
 
 // Cambié el nombre del componente a Register para mayor claridad
 function Register() {
@@ -49,9 +49,6 @@ function Register() {
         </form>
       </div>
       {error && <p className='not-succeed'>{error}</p>}  
-      {success && <p className='succeed'>{success}</p>}  {/* Mensaje de éxito */}
-      {/* Aquí puedes redirigir al usuario al componente Login */}
-      {success && <Login />}  {/* Mostrar el componente Login tras registro exitoso */}
     </div>
   );
 }

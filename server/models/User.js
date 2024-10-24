@@ -10,17 +10,21 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true // Ensures password is not empty
+    required: true 
   },
   total_games: { 
     type: Number, 
     default: 0 
   },
-  wins: { 
+  history: {
+    type: Array, 
+    default: [] 
+  },
+  winPercentage: {
     type: Number, 
     default: 0 
   },
-  win_percentage: { 
+  wins: { 
     type: Number, 
     default: 0 
   }

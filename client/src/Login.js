@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
 
-function Login() {
-  const [username, setUsername] = useState('');
+function Login({onLogin}) {
+  const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
    
       try {
-      const response = await axios.post('http://localhost:5000/login', { username, password });
+      const response = await axios.post('http://localhost:5000/login', { user, password });
       console.log(response.data); 
-      setUsername(username)
-
+      setUser(user)
+        onLogin(user);
       setSuccess('ok');
       setError('');  // Clear any previous error message
     
@@ -33,12 +33,12 @@ function Login() {
     <div className='bodylogs'>
       <div className="login-container">
         <h2>Indica tu nombre</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLogin}>
           <input
             type="text"
             placeholder="Nombre de usuario"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={user}
+            onChange={(e) => setUser(e.target.value)}
           /> <br/>
           <input
           type="password"

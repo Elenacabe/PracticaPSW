@@ -7,6 +7,7 @@ import initlogo from './assets/logoincio.webp'
 import Footer from './Footer';
 import Nav from './Nav';
 import Register from './Register';
+import Login from './Login';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,6 +50,7 @@ function App() {
             
           </div>
           <Register onLogin={handleLogin} />  
+          <Login onLogin={handleLogin} />
         </>
         
       ) : (
