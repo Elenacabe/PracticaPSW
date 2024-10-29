@@ -50,11 +50,11 @@ app.post('/login', async (req, res) => {
 // JUEGOS
 app.post('/game', async (req, res) => {
   const { userId, result, gameType, history } = req.body;
-  const game = new Game({ userId, result, gameType,history });
+  const newGame = new Game({ userId, result, gameType, history });
 
   try {
-    await game.save();
-
+    await newGame.save();
+    console.log('Game saved'+ req.body);
     const user = await User.findById(userId); //UPDATEAMOS EL USUARIO
     user.total_games += 1;
     user.history.push(result);

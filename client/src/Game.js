@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios'; // Asegúrate de importar axios
 import rockImg from './assets/rock.png';
 import paperImg from './assets/paper.png';
@@ -24,13 +24,14 @@ function Game({ onPlay, user }) {
   const [gameType, setGameType] = useState('');
   const [userScoreBoard, setUserScoreBoard] = useState(0);
   const [computerScoreBoard, setComputerScoreBoard] = useState(0);
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState([]);;
   const [resultBack, setResultBack] = useState('');
+ 
 
   const getComputerChoice = () => {
     return options[Math.floor(Math.random() * options.length)];
   };
-
+  
   const determineWinner = (user, computer) => {
     if (user === computer) return 'EMPATE';
     if (
@@ -49,11 +50,14 @@ function Game({ onPlay, user }) {
     setComputerChoice('');
     setGameResult('');
     setResult('');
+    setResultBack('');
+    setGameType('');
+    setUserScoreBoard(0);
+    setComputerScoreBoard(0)
   };
 
   const handleGameType = (type) => {
     setGameType(type);
-    resetGame();
   };
 
   // JUGADA EN FRONT
@@ -81,57 +85,69 @@ const handleClick = (choice) => {
 
   // ALGUIEN GAMA?
   const checkForGameOver = (player, score) => {
-    let winningScore;
-  
-    // DETERMINAR CUANTOS PUNTOS PARA GANAR POR TIPO JUEGO
+     // Valor por defecto para el tipo de juego
+  let winningScore;
     switch (gameType) {
-      case 'three':
-        winningScore = 3;
-        break;
       case 'five':
         winningScore = 5;
         break;
       case 'seven':
         winningScore = 7;
         break;
-      default:
-        winningScore = 3; // DEFAULT SIN CHOICE
+        default:
+          winningScore = 3;
     }
   
-    if (score === winningScore) { //SI LLEGO AL WINNING SCORE PARAMOS
+    if (score === winningScore) {
       if (player === 'user') {
         setResult('GANASTE LA PARTIDA');
-        setResultBack('win')
-        setGameType('')
-        onPlay('GANASTE LA PARTIDA');
+        setResultBack('win');
       } else {
         setResult('PERDISTE LA PARTIDA');
-        setResultBack('lose')
-        setGameType('')
-        onPlay('PERDISTE LA PARTIDA');
+        setResultBack('loss');
       }
+      
+       // Llamada al backend al finalizar el juego
+      resetGame();
+      
+    }
+  };
+
+  useEffect(() => {
+    
+    if (resultBack) {
+      handleGame();
+    }
+  }, [resultBack]);
   
 
-      // RESET JUEGO
-      setUserScoreBoard(0);
-      setComputerScoreBoard(0);
-    }
-  };
-
   // BACKKKKKKK MANAGEMENTTT
-  const handleGame = async (choice) => {
-    try {
-      const response = await axios.post('http://localhost:5000/game', { //ESTO ES LO Q LE PASO AL BACK
-        userId: user,
-        result: resultBack,
-        gameType: gameType,
-        history: history,
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error al enviar los datos del juego:', error);
-    }
-  };
+  const handleGame = async () => {
+    
+    if (!gameType||!resultBack||!history||!user) {
+      console.error('Faltan datos para enviar al servidor game'+gameType+'result-----   '+resultBack+'     hist'+history+'user'+user);
+      return;
+    } else
+      try {
+        const response = await axios.post('http://localhost:5000/game', { // Datos enviados al backend
+          userId: user,
+          result: resultBack,
+          gameType: gameType,
+          history: history,
+        });
+        
+        if (response.status === 200) {
+          console.log('Datos enviados correctamente:', response.data);
+        } else {
+          console.error('Error en la respuesta del servidor:', response.status, response.data);
+        }
+      } catch (error) {
+        console.error('Error al enviar los datos del juego:', error.message);
+      }
+      resetGame();
+    };
+  
+    
 
   return (
     
@@ -142,8 +158,7 @@ const handleClick = (choice) => {
         {gameType && options.map((option) => (
           <button key={option}
             onClick={() => {
-              handleClick(option);
-              handleGame(option);
+              handleClick(option);;
             }}
           >
             {option}
