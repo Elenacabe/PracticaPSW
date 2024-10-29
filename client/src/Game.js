@@ -21,7 +21,7 @@ function Game({ onPlay, user }) {
   const [userChoice, setUserChoice] = useState('');
   const [computerChoice, setComputerChoice] = useState('');
   const [gameResult, setGameResult] = useState('');
-  const [gameType, setGameType] = useState('three');
+  const [gameType, setGameType] = useState('');
   const [userScoreBoard, setUserScoreBoard] = useState(0);
   const [computerScoreBoard, setComputerScoreBoard] = useState(0);
   const [history, setHistory] = useState([]);
@@ -57,7 +57,7 @@ function Game({ onPlay, user }) {
   };
 
   // JUGADA EN FRONT
-  const handleClick = (choice) => {
+const handleClick = (choice) => {
     const computerChoice = getComputerChoice();
     const result = determineWinner(choice, computerChoice);
 
@@ -102,10 +102,12 @@ function Game({ onPlay, user }) {
       if (player === 'user') {
         setResult('GANASTE LA PARTIDA');
         setResultBack('win')
+        setGameType('')
         onPlay('GANASTE LA PARTIDA');
       } else {
         setResult('PERDISTE LA PARTIDA');
         setResultBack('lose')
+        setGameType('')
         onPlay('PERDISTE LA PARTIDA');
       }
   
@@ -132,12 +134,13 @@ function Game({ onPlay, user }) {
   };
 
   return (
+    
     <div className="game-container">
       <h2>Juega Piedra, Papel o Tijeras</h2>
       <div className="options">
-        {options.map((option) => (
-          <button
-            key={option}
+      
+        {gameType && options.map((option) => (
+          <button key={option}
             onClick={() => {
               handleClick(option);
               handleGame(option);
@@ -147,14 +150,14 @@ function Game({ onPlay, user }) {
           </button>
         ))}
       </div>
-
+    
       <Marcador userScoreBoard={userScoreBoard} computerScoreBoard={computerScoreBoard} user={user} />
-
+      {!gameType&&
       <div className="game-type">
         <button onClick={() => handleGameType('three')}>Mejor de 3</button>
         <button onClick={() => handleGameType('five')}>Mejor de 5</button>
         <button onClick={() => handleGameType('seven')}>Mejor de 7</button>
-      </div>
+      </div>}
 
       <div className="choices-display">
         {userChoice && (

@@ -26,7 +26,8 @@ app.post('/register', async (req, res) => {
   
   try {
     await newUser.save();
-    res.status.apply(200).json({ message: 'Enhorabuena' });
+    res.status(200).json({ message: 'Enhorabuena' });
+
   } catch (error) {
     res.status(500).json({ message: 'Algo fue mal' });
   }

@@ -17,14 +17,14 @@ function Register() {
       const response = await axios.post('http://localhost:5000/register', { username, password });
       console.log(response.data); 
       setSuccess('Usuario registrado correctamente.');
-      setError('');  // Limpiar cualquier error previo
+      setError('');  
     } catch (error) {
       if (error.response) {
-        setError(error.response.data.message);  // Error desde la respuesta del servidor
+        setError(error.response.data.message);  // Error desde server
       } else {
         setError('Algo fue mal.');
       }
-      setSuccess('');  // Limpiar el mensaje de éxito en caso de error
+      setSuccess('');  
     }
   }
 

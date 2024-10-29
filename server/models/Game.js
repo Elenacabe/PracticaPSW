@@ -10,7 +10,7 @@ const gameSchema = new mongoose.Schema({
   },
   result: {
      type: String, 
-     enum: ['win', 'loss', 'draw'] 
+     enum: ['win', 'loss'] 
     },
   game_date: { 
     type: Date, 
