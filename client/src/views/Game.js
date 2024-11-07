@@ -59,6 +59,7 @@ function Game({user}) {
     setUserScoreBoard(0);
     setComputerScoreBoard(0)
     setRoundResult('')
+    setFinal(false)
   };
 
   const handleGameType = (type) => {
