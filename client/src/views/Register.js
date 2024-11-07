@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Login.css';  // Asumo que aquí estás aplicando el estilo global para login y registro
-
+import '../styles/Login.css';  // Asumo que aquí estás aplicando el estilo global para login y registro
+import { Navigate, useNavigate } from 'react-router-dom';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 // Cambié el nombre del componente a Register para mayor claridad
 function Register() {
@@ -10,6 +12,8 @@ function Register() {
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
 
+  const navigate = useNavigate();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -17,7 +21,8 @@ function Register() {
       const response = await axios.post('http://localhost:5000/register', { username, password });
       console.log(response.data); 
       setSuccess('Usuario registrado correctamente.');
-      setError('');  
+      navigate('/login')
+      setError(''); 
     } catch (error) {
       if (error.response) {
         setError(error.response.data.message);  // Error desde server
@@ -30,8 +35,9 @@ function Register() {
 
   return (
     <div className='bodylogs'>
+      <Nav/>
       <div className="login-container">
-        <h2>Indica tu nombre</h2>
+        <h2>Crear cuenta</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -46,9 +52,11 @@ function Register() {
             placeholder="Contraseña"
           /><br/>
           <button type="submit">Registrarse</button>
+          <a href='/login'>Inicia sesión</a>
         </form>
       </div>
       {error && <p className='not-succeed'>{error}</p>}  
+      <Footer/>
     </div>
   );
 }

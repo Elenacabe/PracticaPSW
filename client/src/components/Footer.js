@@ -1,6 +1,6 @@
 import React from 'react';
-import logo_empresa from './assets/logo_empresa.jpeg';
-import './footer.css';
+import logo_empresa from '../assets/logo_empresa.jpeg';
+import '../styles/footer.css';
 
 const Footer = () => {
   return (

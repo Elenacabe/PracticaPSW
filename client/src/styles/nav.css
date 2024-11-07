@@ -37,3 +37,26 @@ nav {
     font-size: 1.2rem;
     
 }
+
+.nav-container a {
+    color: wheat;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-right: 20px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-container a:hover {
+    background-color: #5c5c5c;
+    color: #fff;
+}
+
+.nav-container .stats-link {
+    margin-left: auto;  /* Esto mueve el enlace hacia la derecha */
+}
+
+.nav-container .house-icon {
+    margin-left: auto;
+}

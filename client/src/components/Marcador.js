@@ -1,5 +1,5 @@
 import React /*, { useState }*/ from 'react'; //si no se usa useState, no es necesario importarlo
-import './marcador.css'
+import '../styles/marcador.css'
 
 function Marcador ({userScoreBoard, computerScoreBoard, user}) {
 //texto en espaniolll! poner ordenador!
