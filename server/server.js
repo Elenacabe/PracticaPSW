@@ -48,20 +48,23 @@ app.post('/login', async (req, res) => {
 
 
 // JUEGOS
-app.post('/game', async (req, res) => {
-  const { userId, result, gameType, history } = req.body;
-  const newGame = new Game({ userId, result, gameType, history });
+app.post('/resultsOfGame', async (req, res) => {
+  const {result, userName} = req.body; // recogemos los datos
 
   try {
-    await newGame.save();
-    console.log('Game saved'+ req.body);
-    const user = await User.findById(userId); //UPDATEAMOS EL USUARIO
+    
+    console.log("result: " , result);
+    console.log("userId:", userName);
+    const user = await Game.findOne({userName: userName}); //UPDATEAMOS EL USUARIO
+    console.log("user", Game);
     user.total_games += 1;
-    user.history.push(result);
-    if (result === 'win') {
+    user.wins += 1;
+    
+    if (result == 1) {
       user.wins += 1;
-    }
+    } 
     user.win_percentage = (user.wins / user.total_games) * 100;
+
     await user.save();
 
     res.status(200).json({ message: 'OK ', user });

@@ -27,7 +27,7 @@ function Game({user}) {
   const [userScoreBoard, setUserScoreBoard] = useState(0);
   const [computerScoreBoard, setComputerScoreBoard] = useState(0);
   const [history, setHistory] = useState([]);;
-  const [resultBack, setResultBack] = useState('');
+  const [finalResult, setFinalResult] = useState(0); // guardamos el resultado final del juego victoria o derrota con true o false
   const [final, setFinal] = useState(false); 
   const [roundResult, setRoundResult] = useState('')
  
@@ -50,16 +50,20 @@ function Game({user}) {
   };
 
   const resetGame = () => {
+    //hacemos push a la base de datos
+    console.log("EL RESULTADO FINAL ES", finalResult);
+    console.log("El username es :", user)
+    pushToDataBase();
     setUserChoice('');
     setComputerChoice('');
     setGameResult('');
     setResult('');
-    setResultBack('');
+    setFinalResult(0);
     setGameType('');
     setUserScoreBoard(0);
-    setComputerScoreBoard(0)
-    setRoundResult('')
-    setFinal(false)
+    setComputerScoreBoard(0);
+    setRoundResult('');
+    setFinal(false);
   };
 
   const handleGameType = (type) => {
@@ -118,10 +122,10 @@ const handleClick = (choice) => {
     if (score === winningScore) {
       if (player === 'user') {
         setResult('GANASTE LA PARTIDA');
-        setResultBack('win');
+        setFinalResult(1); // ganar = true
       } else {
         setResult('PERDISTE LA PARTIDA');
-        setResultBack('loss');
+        setFinalResult(0); // perder = false
       }
       
       setFinal(true)
@@ -133,31 +137,27 @@ const handleClick = (choice) => {
 
   
 
-  // BACKKKKKKK MANAGEMENTTT
-  // const handleGame = async () => {
+  //BACKKKKKKK MANAGEMENTTT
+  const pushToDataBase = async () => {
     
-  //   if (!gameType||!resultBack||!history||!user) {
-  //     console.error('Faltan datos para enviar al servidor game'+gameType+'result-----   '+resultBack+'     hist'+history+'user'+user);
-  //     return;
-  //   } else
-  //     try {
-  //       const response = await axios.post('http://localhost:5000/game', { // Datos enviados al backend
-  //         userId: user,
-  //         result: resultBack,
-  //         gameType: gameType,
-  //         history: history,
-  //       });
+      try {
+        const response = await axios.post('http://localhost:5000/resultsOfGame', {
+          result: finalResult,
+          userName: user
+        });
         
-  //       if (response.status === 200) {
-  //         console.log('Datos enviados correctamente:', response.data);
-  //       } else {
-  //         console.error('Error en la respuesta del servidor:', response.status, response.data);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error al enviar los datos del juego:', error.message);
-  //     }
-  //     resetGame();
-  //   };
+        if (response.status === 200) {
+          console.log('Datos enviados correctamente:', response.data);
+        } else {
+          console.error('Error en la respuesta del servidor:', response.status, response.data);
+        }
+      } catch (error) {
+        console.error('Error al enviar los datos del juego:', error.message);
+      
+      }
+  };
+
+
   
   
 
