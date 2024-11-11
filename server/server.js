@@ -37,7 +37,7 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
   const { user, password } = req.body;
   const username = await User.findOne({ username: user }); //ES ASI PQ EN EL MODELO ES USERNAME
-
+  console.log("Esto es el usuario q encuentra el login: ",username)
   if (username && bcrypt.compareSync(password, username.password)) {
     res.status(200).json({ message: 'PA DENTRO', user });// 200-> OK MIRAR HTTP CATS PARA INFO
   } else {
@@ -49,25 +49,25 @@ app.post('/login', async (req, res) => {
 
 // JUEGOS
 app.post('/resultsOfGame', async (req, res) => {
-  const {result, userName} = req.body; // recogemos los datos
+  const { result, userId } = req.body; // recogemos los datos
 
   try {
     
     console.log("result: " , result);
-    console.log("userId:", userName);
-    const user = await Game.findOne({userName: userName}); //UPDATEAMOS EL USUARIO
-    console.log("user", Game);
-    user.total_games += 1;
-    user.wins += 1;
+    console.log("userId:", typeof(userId));
+    const userName = await User.findOne({ username: userId }); //UPDATEAMOS EL USUARIO
+    console.log("Este es el usuario que encuentra el juego para actualizar info", userName)
+    userName.total_games += 1;
+    userName.wins += 1;
     
     if (result == 1) {
-      user.wins += 1;
+      userName.wins += 1;
     } 
-    user.win_percentage = (user.wins / user.total_games) * 100;
+    userName.winPercentage = (userName.wins / userName.total_games) * 100;
 
-    await user.save();
+    await userName.save();
 
-    res.status(200).json({ message: 'OK ', user });
+    res.status(200).json({ message: 'OK ', userName });
   } catch (error) {
     res.status(500).json({ message: 'ERROR' });
   }

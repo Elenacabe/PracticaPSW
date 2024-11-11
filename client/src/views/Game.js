@@ -51,8 +51,7 @@ function Game({user}) {
 
   const resetGame = () => {
     //hacemos push a la base de datos
-    console.log("EL RESULTADO FINAL ES", finalResult);
-    console.log("El username es :", user)
+    
     pushToDataBase();
     setUserChoice('');
     setComputerChoice('');
@@ -139,11 +138,12 @@ const handleClick = (choice) => {
 
   //BACKKKKKKK MANAGEMENTTT
   const pushToDataBase = async () => {
-    
+      console.log("EL RESULTADO FINAL ES", finalResult);
+      console.log("El username es :", user)
       try {
         const response = await axios.post('http://localhost:5000/resultsOfGame', {
           result: finalResult,
-          userName: user
+          userId: user,
         });
         
         if (response.status === 200) {
