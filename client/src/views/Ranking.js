@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import '../styles/Ranking.css';
 
 function Ranking({ user }) {
     const [users, setUsers] = React.useState([]);
@@ -29,15 +30,36 @@ function Ranking({ user }) {
 
     return (
         <div>
-            <Nav />
-            <h2>ranking loco</h2>
-            {users.map((user) => (
-                <ol  key={user.id}>
-                    {user.username} ------------ {user.winPercentage}------{user.total_games}------{user.wins}%
-                </ol>
-            ))}
-            <Footer />
+        <Nav />
+        <div className="ranking-container">
+            <h1>Ranking</h1>
+            <table className="ranking-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Victorias</th>
+                        <th>Derrotas</th>
+                        <th>Porcentaje de victoria</th>
+                        <th>Partidas totales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map((user) => (
+                        <tr key={user.id}>
+                            <td>{user.username}</td>
+                            <td>{user.wins}</td>
+                            <td>{user.total_games - user.wins}</td>
+                            <td>{user.winPercentage.toFixed(2)}%</td>
+                            <td>{user.total_games}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
+        
+        
+        <Footer />
+    </div>
     );
 }
 

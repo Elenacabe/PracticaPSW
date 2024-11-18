@@ -86,7 +86,10 @@ app.get('/user/:id', async (req, res) => {
   const userId = req.params.id;
   const userName = await User.findOne({ username: userId });
   if (userName) {
-    res.send(userName,total_games,winPercentage,wins);
+    res.send(userName);
+    //res.send(userName,total_games,winPercentage,wins);
+    
+    //res.status(200).json(user);
   } else {
     res.status(404).json({ message: 'User not found' });
   }

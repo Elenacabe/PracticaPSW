@@ -8,10 +8,14 @@ import Ranking from './views/Ranking';
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState(null); // donde guardaremos el nombre de usuario tras el login
+  const [currentUser, setCurrentUser] = useState(() => {
+    return localStorage.getItem('currentUser'); // Recupera el usuario de localStorage
+});
+
 
   const handleLogin = (userName) =>{
     setCurrentUser(userName); // seteamos el nombre de usuario despues del inicio de sesión
+    localStorage.setItem('currentUser', userName);
   }
 
 
