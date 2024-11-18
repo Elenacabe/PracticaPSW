@@ -74,12 +74,23 @@ app.post('/resultsOfGame', async (req, res) => {
 app.get('/getAllUsers', async (req, res) => {
   try {
     const users = await User.find();
-    res.send(users);
+    arrayOrdenado= users.sort((a, b) => b.winPercentage - a.winPercentage)
+    res.send(arrayOrdenado);
   } catch (error) {
     res.status(500).json({ message: 'ERROR' });
   }
 });
 
+// GET USER BY ID
+app.get('/user/:id', async (req, res) => {
+  const userId = req.params.id;
+  const userName = await User.findOne({ username: userId });
+  if (userName) {
+    res.send(userName,total_games,winPercentage,wins);
+  } else {
+    res.status(404).json({ message: 'User not found' });
+  }
+});
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
