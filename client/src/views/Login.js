@@ -38,7 +38,7 @@ function Login({onLogin}) {
 
   return (
     <div className='bodylogs'>
-      <Nav/>
+      <Nav user={user}/>
       <div className="login-container">
         <h2>Indica tu nombre</h2>
         <form onSubmit={handleLogin}>

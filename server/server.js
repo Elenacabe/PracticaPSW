@@ -58,13 +58,23 @@ app.post('/resultsOfGame', async (req, res) => {
     const userName = await User.findOne({ username: userId }); //UPDATEAMOS EL USUARIO
     console.log("Este es el usuario que encuentra el juego para actualizar info", userName)
     userName.total_games += 1;
-      userName.wins += result;
+    userName.wins += result;
     
     userName.winPercentage = (userName.wins / userName.total_games) * 100;
 
     await userName.save();
 
     res.status(200).json({ message: 'OK ', userName });
+  } catch (error) {
+    res.status(500).json({ message: 'ERROR' });
+  }
+});
+
+// GET USER
+app.get('/getAllUsers', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.send(users);
   } catch (error) {
     res.status(500).json({ message: 'ERROR' });
   }

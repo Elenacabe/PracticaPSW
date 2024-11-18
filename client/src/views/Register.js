@@ -11,6 +11,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
+  const [user, setUser] = useState('');
 
   const navigate = useNavigate();
   
@@ -35,7 +36,7 @@ function Register() {
 
   return (
     <div className='bodylogs'>
-      <Nav/>
+      <Nav user={user}/>
       <div className="login-container">
         <h2>Crear cuenta</h2>
         <form onSubmit={handleSubmit}>
