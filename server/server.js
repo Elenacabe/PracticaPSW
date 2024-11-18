@@ -58,11 +58,8 @@ app.post('/resultsOfGame', async (req, res) => {
     const userName = await User.findOne({ username: userId }); //UPDATEAMOS EL USUARIO
     console.log("Este es el usuario que encuentra el juego para actualizar info", userName)
     userName.total_games += 1;
-    userName.wins += 1;
+      userName.wins += result;
     
-    if (result == 1) {
-      userName.wins += 1;
-    } 
     userName.winPercentage = (userName.wins / userName.total_games) * 100;
 
     await userName.save();
