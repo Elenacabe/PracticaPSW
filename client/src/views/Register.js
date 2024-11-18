@@ -36,7 +36,7 @@ function Register() {
 
   return (
     <div className='bodylogs'>
-      <Nav user={user}/>
+      <Nav />
       <div className="login-container">
         <h2>Crear cuenta</h2>
         <form onSubmit={handleSubmit}>

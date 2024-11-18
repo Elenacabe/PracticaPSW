@@ -164,7 +164,7 @@ const handleClick = (choice) => {
   return (
     
     <div className="game-container">
-      <Nav user={user}/>
+      <Nav bool={true}/>
 
       <h2>Juega Piedra, Papel o Tijeras</h2>
       

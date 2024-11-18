@@ -5,8 +5,7 @@ import logo_ini from '../assets/logoincio.webp'
 import '../styles/nav.css'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-
-function Nav({ user }){
+function Nav({ bool }){
     
     return (
 
@@ -15,7 +14,7 @@ function Nav({ user }){
                 <img src={logo_ini} alt="Logo juego"></img>
                 <p>PIEDRA, PAPEL O TIJERA</p>
                 <a href="/" class="house-icon"><i class="fas fa-home"></i></a>
-                {user&& <a href='/estadistics' className='stats-link'>Estadísticas</a>}
+                {bool&& <a href='/estadistics' className='stats-link'>Estadísticas</a>}
                 <a href='/ranking' className='ranking-link'>Ranking</a>
                 
             </div>
