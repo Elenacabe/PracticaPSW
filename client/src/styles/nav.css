@@ -54,7 +54,7 @@ nav {
 }
 
 .nav-container .stats-link {
-    margin-left: auto;  /* Esto mueve el enlace hacia la derecha */
+    margin-left: 0px;  /* Esto mueve el enlace hacia la derecha */
 }
 
 .nav-container .house-icon {
