@@ -166,6 +166,8 @@ const handleClick = (choice) => {
     <div className="game-container">
       <Nav bool={true}/>
 
+
+<div className="game-logic">
       <h2>Juega Piedra, Papel o Tijeras</h2>
       
       
@@ -255,7 +257,9 @@ const handleClick = (choice) => {
         {gameResult === 'EMPATE' && <img src={drawImg} alt="Empate" />}
       </div>
 
+      </div>
       <Footer />
+      
     </div>
   );
 }

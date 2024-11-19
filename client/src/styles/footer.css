@@ -1,17 +1,18 @@
- 
+.footer-container{
+  color: white;
+  bottom: -5vh;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 0px;
+  text-align: center;
+  background: linear-gradient(180deg, #4A4A4A, #2C2C2C);
+  margin-bottom: 0;
+  top: 5vh;
+}
 
-  .footer-container{
-    color: white;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding: 10px 0;
-    margin-top: 0px;
-    text-align: center;
-    background: linear-gradient(180deg, #4A4A4A, #2C2C2C);
-    margin-bottom: 0;
-  }
+  
 
 
  .logof{
