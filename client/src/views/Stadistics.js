@@ -32,6 +32,7 @@ function Stadistics({ user }) {
     return (
         <div>
             <Nav />
+            <div className="stadistics-logic">
             <div className="stadistics-container">
                 <h1>Estadísticas de {userData.username}</h1>
                 <table className="stats-table">
@@ -53,6 +54,9 @@ function Stadistics({ user }) {
                     </tbody>
                 </table>
             </div>
+
+            </div>
+            
             
             
             <Footer />

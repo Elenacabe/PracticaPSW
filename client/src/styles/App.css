@@ -160,8 +160,9 @@ h3{
 
 
 .game-logic{
-  margin-top: 90px;
-  min-height: 80vh;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  min-height:68vh;
   
 }
 /* Media Queries para Responsividad */

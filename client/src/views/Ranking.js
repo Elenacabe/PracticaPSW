@@ -31,6 +31,7 @@ function Ranking({ user }) {
     return (
         <div>
         <Nav />
+        <div className="ranking-logic">
         <div className="ranking-container">
             <h1>Ranking</h1>
             <table className="ranking-table">
@@ -56,6 +57,9 @@ function Ranking({ user }) {
                 </tbody>
             </table>
         </div>
+
+        </div>
+        
         
         
         <Footer />
