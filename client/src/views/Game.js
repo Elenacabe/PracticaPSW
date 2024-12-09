@@ -3,6 +3,9 @@ import axios from 'axios'; // Asegúrate de importar axios
 import rockImg from '../assets/rock.png';
 import paperImg from '../assets/paper.png';
 import scissorsImg from '../assets/scissors.png';
+import rockRealisticImg from '../assets/rock_realistic.png';
+import paperRealisticImg from '../assets/paper_realistic.png';
+import scissorsRealisticImg from '../assets/scissors_realistic.png';
 import winImg from '../assets/win.png';
 import loseImg from '../assets/lose.png';
 import drawImg from '../assets/draw.png';
@@ -18,6 +21,12 @@ const imageMap = {
   Tijeras: scissorsImg,
 };
 
+const imageRealisticMap = {
+  Piedra: rockRealisticImg,
+  Papel: paperRealisticImg,
+  Tijeras: scissorsRealisticImg
+}
+
 function Game({user}) {
   const [result, setResult] = useState('');
   const [userChoice, setUserChoice] = useState('');
@@ -30,11 +39,18 @@ function Game({user}) {
   const [finalResult, setFinalResult] = useState(0); // guardamos el resultado final del juego victoria o derrota con true o false
   const [final, setFinal] = useState(false); 
   const [roundResult, setRoundResult] = useState('')
+  const [isRealistic, setIsRealistic] = useState(false);
  
 
   const getComputerChoice = () => {
     return options[Math.floor(Math.random() * options.length)];
   };
+
+  const handleToggleRealistic = (e) => {
+    setIsRealistic(e.target.checked);
+  };
+
+  const currentImageMap = isRealistic ? imageRealisticMap : imageMap;
   
   const determineWinner = (user, computer) => {
     if (user === computer) return 'EMPATE';
@@ -169,6 +185,17 @@ const handleClick = (choice) => {
 
 <div className="game-logic">
       <h2>Juega Piedra, Papel o Tijeras</h2>
+      <div class="switch-container">
+        <label class="switch">
+          <input
+              type="checkbox"
+              id="toggle-realistic"
+              checked={isRealistic}
+              onChange={handleToggleRealistic}
+            />
+        </label>
+        <span id="mode-label">Modo Realista</span>
+      </div>
       
       
       {/* en caso de no haber elegido la tipo de partida se muestra */}
@@ -206,13 +233,13 @@ const handleClick = (choice) => {
         {userChoice && (
           <div className="text-box choice">
             <h3>{user}:</h3>
-            <img src={imageMap[userChoice]} alt={userChoice} />
+            <img src={currentImageMap[userChoice]} alt={userChoice} />
           </div>
         )}
         {computerChoice && (
           <div className="text-box choice">
             <h3>ORDENADOR:</h3>
-            <img src={imageMap[computerChoice]} alt={computerChoice} />
+            <img src={currentImageMap[computerChoice]} alt={computerChoice} />
           </div>
         )}
       </div>
