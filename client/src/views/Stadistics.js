@@ -8,12 +8,18 @@ function Stadistics({ user }) {
     const [userData, setUserData] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(false);
+    const [rankingPosition, setRankingPosition] = React.useState(null);
 
     React.useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/user/${user}`);
                 setUserData(response.data);
+
+                const rankingResponse = await axios.get('http://localhost:5000/getAllUsers');
+                const ranking = rankingResponse.data;
+                const position = ranking.findIndex((u) => u.username === user) + 1;
+                setRankingPosition(position);
             } catch (error) {
                 setError(true);
                 console.error('Error fetching user:', error);
@@ -42,6 +48,7 @@ function Stadistics({ user }) {
                             <th>Derrotas</th>
                             <th>Porcentaje de victoria</th>
                             <th>Partidas totales</th>
+                            <th>Posición en el ranking</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +57,7 @@ function Stadistics({ user }) {
                             <td>{userData.total_games - userData.wins}</td>
                             <td>{userData.winPercentage.toFixed(2)}%</td>
                             <td>{userData.total_games}</td>
+                            <td>{rankingPosition}</td>
                         </tr>
                     </tbody>
                 </table>
