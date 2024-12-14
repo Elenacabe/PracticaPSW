@@ -56,7 +56,7 @@ function Login({onLogin}) {
         />
           <button type="submit">Login</button>
         </form>
-        <a href='/'>Volver al registro</a>
+        <a href='/' className="button-link">Volver al registro</a>
       </div>
         {error && <p className='not-succeed'>{error}</p>}  
     <Footer/>

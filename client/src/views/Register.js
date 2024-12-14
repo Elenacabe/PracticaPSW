@@ -53,7 +53,7 @@ function Register() {
             placeholder="Contraseña"
           /><br/>
           <button type="submit">Registrarse</button>
-          <a href='/login'>Inicia sesión</a>
+          <a href='/login' className="button-link">Inicia sesión</a>
         </form>
       </div>
       {error && <p className='not-succeed'>{error}</p>}  

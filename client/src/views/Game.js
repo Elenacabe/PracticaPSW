@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Asegúrate de importar axios
 import rockImg from '../assets/rock.png';
 import paperImg from '../assets/paper.png';
@@ -27,7 +27,7 @@ const imageRealisticMap = {
   Tijeras: scissorsRealisticImg
 }
 
-function Game({user}) {
+function Game({ user }) {
   const [result, setResult] = useState('');
   const [userChoice, setUserChoice] = useState('');
   const [computerChoice, setComputerChoice] = useState('');
@@ -37,10 +37,10 @@ function Game({user}) {
   const [computerScoreBoard, setComputerScoreBoard] = useState(0);
   const [history, setHistory] = useState([]);;
   const [finalResult, setFinalResult] = useState(0); // guardamos el resultado final del juego victoria o derrota con true o false
-  const [final, setFinal] = useState(false); 
+  const [final, setFinal] = useState(false);
   const [roundResult, setRoundResult] = useState('')
   const [isRealistic, setIsRealistic] = useState(false);
- 
+
 
   const getComputerChoice = () => {
     return options[Math.floor(Math.random() * options.length)];
@@ -51,7 +51,7 @@ function Game({user}) {
   };
 
   const currentImageMap = isRealistic ? imageRealisticMap : imageMap;
-  
+
   const determineWinner = (user, computer) => {
     if (user === computer) return 'EMPATE';
     if (
@@ -67,7 +67,7 @@ function Game({user}) {
 
   const resetGame = () => {
     //hacemos push a la base de datos
-    
+
     pushToDataBase();
     setUserChoice('');
     setComputerChoice('');
@@ -88,8 +88,8 @@ function Game({user}) {
 
 
 
-//Logica del juego
-const handleClick = (choice) => {
+  //Logica del juego
+  const handleClick = (choice) => {
     const computerChoice = getComputerChoice(); // ejecuta el random del computer
     const result = determineWinner(choice, computerChoice); // con la opcion q elije el user miramos quien gana
 
@@ -111,17 +111,17 @@ const handleClick = (choice) => {
       setRoundResult('Empatas la ronda');
     }
 
-    
 
-    
+
+
   };
 
 
 
   // Verifica si hay un ganador
   const checkForGameOver = (player, score) => {
-  // Valor por defecto para el tipo de juego
-  let winningScore;
+    // Valor por defecto para el tipo de juego
+    let winningScore;
     switch (gameType) {
       case 'five':
         winningScore = 5;
@@ -129,11 +129,11 @@ const handleClick = (choice) => {
       case 'seven':
         winningScore = 7;
         break;
-        default:
-          winningScore = 3;
+      default:
+        winningScore = 3;
     }
 
-  
+
     if (score === winningScore) {
       if (player === 'user') {
         setResult('GANASTE LA PARTIDA');
@@ -142,151 +142,158 @@ const handleClick = (choice) => {
         setResult('PERDISTE LA PARTIDA');
         setFinalResult(0); // perder = false
       }
-      
+
       setFinal(true)
-      
-      
+
+
     }
   };
 
 
-  
+
 
   //BACKKKKKKK MANAGEMENTTT
   const pushToDataBase = async () => {
-      console.log("EL RESULTADO FINAL ES", finalResult);
-      console.log("El username es :", user)
-      try {
-        const response = await axios.post('http://localhost:5000/resultsOfGame', {
-          result: finalResult,
-          userId: user,
-        });
-        
-        if (response.status === 200) {
-          console.log('Datos enviados correctamente:', response.data);
-        } else {
-          console.error('Error en la respuesta del servidor:', response.status, response.data);
-        }
-      } catch (error) {
-        console.error('Error al enviar los datos del juego:', error.message);
-      
+    console.log("EL RESULTADO FINAL ES", finalResult);
+    console.log("El username es :", user)
+    try {
+      const response = await axios.post('http://localhost:5000/resultsOfGame', {
+        result: finalResult,
+        userId: user,
+      });
+
+      if (response.status === 200) {
+        console.log('Datos enviados correctamente:', response.data);
+      } else {
+        console.error('Error en la respuesta del servidor:', response.status, response.data);
       }
+    } catch (error) {
+      console.error('Error al enviar los datos del juego:', error.message);
+
+    }
   };
 
 
-  
-  
+
+
 
   return (
-    
+
     <div className="game-container">
-      <Nav bool={true}/>
+      <Nav bool={true} />
 
 
-<div className="game-logic">
-      <h2>Juega Piedra, Papel o Tijeras</h2>
-      <div class="switch-container">
-        <label class="switch">
-          <input
+      <div className="game-logic">
+        <h2 className="game-title">🎮 ¡Prepárate para el Duelo! 🪨📄✂️</h2>
+        <div className="switch-container">
+          <label className="switch">
+            <input
               type="checkbox"
               id="toggle-realistic"
               checked={isRealistic}
               onChange={handleToggleRealistic}
             />
-        </label>
-        <span id="mode-label">Modo Realista</span>
-      </div>
-      
-      
-      {/* en caso de no haber elegido la tipo de partida se muestra */}
-      {!gameType&&
-        <div className="game-type">
-          <p>Elige un modo de juego</p>
-          <button onClick={() => handleGameType('three')}>Mejor de 3</button>
-          <button onClick={() => handleGameType('five')}>Mejor de 5</button>
-          <button onClick={() => handleGameType('seven')}>Mejor de 7</button>
+            <span className="slider"></span>
+          </label>
+          <span id="mode-label">Modo Realista</span>
         </div>
-      }
 
-      {/* solo se mostrará en caso de que se haya elegido un tipo de juego */}
-      {gameType && !final &&
-        <>
-          <div className="options">
-           {options.map((option) => (
-              <button key={option} onClick={() => {handleClick(option)}}> 
-                  {option}
-              </button>
-              ))
-            }
+
+        {/* en caso de no haber elegido la tipo de partida se muestra */}
+        {!gameType &&
+          <div className="game-type">
+            <p>Elige un modo de juego</p>
+            <button onClick={() => handleGameType('three')} className="game-button">
+              🎮 Mejor de 3
+            </button>
+            <button onClick={() => handleGameType('five')} className="game-button">
+              🔥 Mejor de 5
+            </button>
+            <button onClick={() => handleGameType('seven')} className="game-button">
+              🏆 Mejor de 7
+            </button>
           </div>
-          
-        </>
-         
-      }
-
-      {gameType &&
-        <Marcador userScoreBoard={userScoreBoard} computerScoreBoard={computerScoreBoard} user={user} />  
-        
-      }
-
-      <div className="choices-display">
-        {userChoice && (
-          <div className="text-box choice">
-            <h3>{user}:</h3>
-            <img src={currentImageMap[userChoice]} alt={userChoice} />
-          </div>
-        )}
-        {computerChoice && (
-          <div className="text-box choice">
-            <h3>ORDENADOR:</h3>
-            <img src={currentImageMap[computerChoice]} alt={computerChoice} />
-          </div>
-        )}
-      </div>
-
-    {result && (
-      <>
-      
-      
-      <p
-        className="text-box"
-        style={{
-          color: gameResult === 'GANAS' ? 'green' : gameResult === 'PIERDES' ? 'red' : 'gray',
-        }}
-      >
-        {result}
-      </p>
-      <br/>
-      <button onClick={resetGame}>Volver a menu de opciones</button>
-      
-      </>
-      )}
-
-
-
-      <div className="result-image">
-        {roundResult &&
-        <>
-            <p
-            className="text-box"
-            style={{
-              color: gameResult === 'GANAS' ? 'green' : gameResult === 'PIERDES' ? 'red' : 'gray',
-            }}
-          >
-            {roundResult}
-          </p><br/>
-        
-        </>
         }
-        
-        {gameResult === 'GANAS' && <img src={winImg} alt="Ganaste" />}
-        {gameResult === 'PIERDES' && <img src={loseImg} alt="Perdiste" />}
-        {gameResult === 'EMPATE' && <img src={drawImg} alt="Empate" />}
-      </div>
+
+        {/* solo se mostrará en caso de que se haya elegido un tipo de juego */}
+        {gameType && !final &&
+          <>
+            <div className="options">
+              {options.map((option) => (
+                <button key={option} onClick={() => { handleClick(option) }}>
+                  {option}
+                </button>
+              ))
+              }
+            </div>
+
+          </>
+
+        }
+
+        {gameType &&
+          <Marcador userScoreBoard={userScoreBoard} computerScoreBoard={computerScoreBoard} user={user} />
+
+        }
+
+        <div className="choices-display">
+          {userChoice && (
+            <div className="text-box choice">
+              <h3>{user}:</h3>
+              <img src={currentImageMap[userChoice]} alt={userChoice} />
+            </div>
+          )}
+          {computerChoice && (
+            <div className="text-box choice">
+              <h3>ORDENADOR:</h3>
+              <img src={currentImageMap[computerChoice]} alt={computerChoice} />
+            </div>
+          )}
+        </div>
+
+        {result && (
+          <>
+
+
+            <p
+              className="text-box"
+              style={{
+                color: gameResult === 'GANAS' ? 'green' : gameResult === 'PIERDES' ? 'red' : 'gray',
+              }}
+            >
+              {result}
+            </p>
+            <br />
+            <button onClick={resetGame}>Volver a menu de opciones</button>
+
+          </>
+        )}
+
+
+
+        <div className="result-image">
+          {roundResult &&
+            <>
+              <p
+                className="text-box"
+                style={{
+                  color: gameResult === 'GANAS' ? 'green' : gameResult === 'PIERDES' ? 'red' : 'gray',
+                }}
+              >
+                {roundResult}
+              </p><br />
+
+            </>
+          }
+
+          {gameResult === 'GANAS' && <img src={winImg} alt="Ganaste" />}
+          {gameResult === 'PIERDES' && <img src={loseImg} alt="Perdiste" />}
+          {gameResult === 'EMPATE' && <img src={drawImg} alt="Empate" />}
+        </div>
 
       </div>
       <Footer />
-      
+
     </div>
   );
 }
