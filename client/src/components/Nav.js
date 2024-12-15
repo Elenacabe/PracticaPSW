@@ -14,6 +14,7 @@ function Nav({ bool }){
                 <img src={logo_ini} alt="Logo juego"></img>
                 <p>PIEDRA, PAPEL O TIJERA</p>
                 <a href="/" class="house-icon"><i class="fas fa-home"></i></a>
+                {bool&& <a href='/' className='stats-link'>Cerrar Sesión</a>}
                 {bool&& <a href='/estadistics' className='stats-link'>Estadísticas</a>}
                 <a href='/ranking' className='ranking-link'>Ranking</a>
                 
